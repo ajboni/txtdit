@@ -1,0 +1,120 @@
+/* Fonts */
+@import url("https://fonts.googleapis.com/css?family=Noto+Serif+JP&display=swap");
+/* Color definition */
+/* Main Section */
+/* Editor */
+/* Scroll Bars */
+/* Footer */
+/* Import Base Theme */
+/* Fonts */
+@import url("https://fonts.googleapis.com/css?family=Roboto+Mono:700|VT323&display=swap");
+/* Color definition */
+/* Implementation */
+/* Scroll Bars */
+/* Footer */
+body {
+  font-family: "Noto Serif JP", serif;
+  font-size: 1.3rem;
+  font-weight: 400;
+}
+
+main.highlight {
+  border: 10px dashed #a6ca5d;
+}
+
+main {
+  display: flex;
+  min-height: 100vh;
+  flex-flow: column nowrap;
+  box-sizing: border-box;
+  background-color: #1e1e1e;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.editor-container {
+  flex-grow: 1;
+  flex: 2;
+  display: flex;
+  box-sizing: border-box;
+  background-color: inherit;
+  border: 1px solid #bfc0c0;
+  padding: 0px;
+  margin: 50px 20%;
+}
+
+.editor-text-container {
+  flex-grow: 1;
+  flex: 2;
+  box-sizing: border-box;
+  background-color: inherit;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+#editor {
+  width: 100%;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  resize: none;
+  border: none;
+  background-color: inherit;
+  color: #bfc0c0;
+  padding: 20px 40px;
+  margin: 0px;
+  scrollbar-color: #bfc0c0 #1e1e1e;
+  scrollbar-width: thin;
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.6;
+  font-family: "Noto Serif JP", serif;
+}
+
+.footer-container {
+  background-color: #4f5d75;
+  height: 35px;
+  color: white;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.footer-item {
+  margin: 0 0 0 20px;
+  font-weight: 300;
+  cursor: pointer;
+  background-color: inherit;
+}
+
+.footer-item-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.footer-middle {
+  flex: 1;
+}
+
+.footer-item:last-child {
+  margin: 0 20px 0 20px;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-overflow: "";
+  background: inherit;
+  color: inherit;
+  border: none;
+  font-size: inherit;
+  font-weight: inherit;
+  font-family: inherit;
+}

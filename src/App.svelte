@@ -11,7 +11,7 @@
 
   let themeLoaded = false;
   let themeName = localStorage.getItem("theme");
-  const path = "/build/themes/";
+  const path = "/themes/";
   const ext = ".css";
   let theme = `${path}${themeName}${ext}`;
   const defaultTheme = `${path}default${ext}`;
