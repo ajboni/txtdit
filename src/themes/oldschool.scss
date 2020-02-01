@@ -1,0 +1,58 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:700|VT323&display=swap');
+$primary-font-family: 'Roboto', monospace;
+// $primary-font: 'VT323', monospace;
+$primary-font-size: 1.1rem;
+$primary-font-weight: 800;
+
+/* Color definition */
+$color1:	#0000a8	;
+$color2: #a8a8a8;
+$color3: #fcfcfc;
+$color4: #00a8a8;
+$color5: rgba(94, 94, 94, 1);
+
+
+/* Main Section */
+
+$main-bg-color: $color1;
+$main-border:  0px;
+$main-margin: 0px;
+$main-padding: 0px;
+
+/* Editor */
+$editor-container-margin: 50px;
+$editor-container-padding: 0px;
+$editor-container-bg-color: inherit;
+$editor-container-border: 8px solid $color2;
+
+$editor-text-container-margin: 0px;
+$editor-text-container-padding: 0px;
+$editor-text-container-bg-color: inherit;
+$editor-text-container-border: none;
+
+
+$editor-padding: 40px;
+$editor-margin: 0px;
+$editor-bg-color: inherit;
+$editor-color: $color2;
+$editor-font-size: 1.2rem;
+$editor-font-weight: 800;
+
+/* Scroll Bars */
+$scrollbar-width: thin;
+$scrollbar-thumb-color: $color2;
+$scrollbar-track-color: $color5;
+
+/* Footer */
+$footer-height: 30px; 
+$footer-color: $color3;
+$footer-bg-color: $color4;
+$footer-font-size: 1.1rem; 
+$footer-font-weight: 500; 
+
+$footer-item-margin: 0 0 0 20px;
+$footer-item-first-child-margin: 0 20px 0 20px;
+
+/* Import Base Theme */
+@import "app.scss" 

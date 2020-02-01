@@ -1,0 +1,47 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:700|VT323&display=swap');
+$primary-font: 'Roboto', monospace  !default; 
+$primary-font-size: 1.2rem  !default;
+$primary-font-weight: 800  !default;
+
+/* Color definition */
+$color1:	#0000a8  !default;
+$color2: #a8a8a8 !default;
+$color3: #fcfcfc !default;
+$color4: #00a8a8 !default;
+$color5: rgba(94, 94, 94, 1)  !default;
+
+
+/* Implementation */
+
+$main-bg-color: $color1  !default;
+$main-border:  0px  !default;
+$main-margin: 0px  !default;
+$main-padding: 0px  !default;
+
+$editor-container-margin: 10px  !default;
+$editor-container-padding: 0px !default;
+$editor-container-bg-color: inherit !default;
+$editor-container-border: none !default;
+
+$editor-text-container-bg-color: inherit !default;
+$editor-text-container-border: none !default;
+$editor-text-container-padding: 0px !default;
+$editor-text-container-margin: 0px !default;
+
+$editor-padding: 40px !default;
+$editor-margin: 0px !default;
+$editor-bg-color: inherit !default;
+$editor-color: $color2 !default;
+$editor-line-height: 1.6 !default;
+
+/* Scroll Bars */
+$scrollbar-width: thin !default;
+$scrollbar-thumb-color: $color2 !default;
+$scrollbar-track-color: $color5 !default;
+
+/* Footer */
+$footer-height: 25px !default;
+$footer-bg-color: $color2 !default;
+$footer-color: $color5 !default;
+$footer-font-size: .9rem !default;
