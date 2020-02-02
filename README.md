@@ -40,3 +40,5 @@ By default, the server will only respond to requests from localhost. To allow co
 
 If a new variable is added, you should add a default value in `_defaults.scss` otherwise it will throw error on themes not using it.
 
+
+
