@@ -6,6 +6,11 @@
   import "./themes/default.scss";
   import "./themes/simple.scss";
   import "./themes/oasis.scss";
+  import "./themes/saturday.scss";
+  import "./themes/sunday.scss";
+  import "./themes/narrow.scss";
+  import "./themes/vscode.scss";
+  import "./themes/vault76.scss";
 
   import { onMount } from "svelte";
 

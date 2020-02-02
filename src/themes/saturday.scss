@@ -1,27 +1,29 @@
 /* Fonts */
-@import url('https://fonts.googleapis.com/css?family=Literata&display=swap');
-$primary-font-family:  'Literata', serif;
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+$primary-font-family: 'Raleway', sans-serif;
+
+
 // $primary-font: 'VT323', monospace;
-$primary-font-size: 1.3rem;
-$primary-font-weight: 500;
+$primary-font-size: 1.1rem;
+$primary-font-weight: 400;
 
 /* Color definition */
-$color1: rgba(26, 83, 92, 1);
-$color2: rgba(78, 205, 196, 1);
-$color3: rgba(247, 255, 247, 1);
-$color4: rgba(255, 107, 107, 1);
-$color5: rgba(255, 230, 109, 1);
+$color2: rgba(50, 41, 47, 1);
+$color3: rgba(153, 225, 217, 1);
+$color1: rgba(240, 247, 244, 1);
+$color5: rgba(112, 171, 175, 1);
+$color4: rgba(112, 93, 86, 1);
 
 
 /* Main Section */
 
-$main-bg-color: $color3;
+$main-bg-color: $color1;
 $main-border:  0px;
 $main-margin: 0px;
 $main-padding: 0px;
 
 /* Editor */
-$editor-container-margin: 0px;
+$editor-container-margin: 0px ;
 $editor-container-padding: 0px;
 $editor-container-bg-color: inherit;
 $editor-container-border: none;
@@ -32,27 +34,27 @@ $editor-text-container-bg-color: inherit;
 $editor-text-container-border: none;
 
 
-$editor-padding: 40px 120px;
+$editor-padding: 25px 50px;
 $editor-margin: 0px;
 $editor-bg-color: inherit;
-$editor-color: $color1;
-$editor-font-size:  $primary-font-size;
+$editor-color: $color2;
+$editor-font-size: $primary-font-size;
 $editor-font-weight: $primary-font-weight;
 
 /* Scroll Bars */
-$scrollbar-width: 1;
-$scrollbar-thumb-color: $color1;
-$scrollbar-track-color: $color4;
+$scrollbar-width: thin;
+$scrollbar-thumb-color: $color4;
+$scrollbar-track-color: $color1;
 
 /* Footer */
 $footer-height: 30px; 
-$footer-color: $color3;
+$footer-color: $color1;
 $footer-bg-color: $color4;
-$footer-font-size: 1rem; 
+$footer-font-size: 1.1rem; 
 $footer-font-weight: 500; 
 
 $footer-item-margin: 0 0 0 20px;
 $footer-item-first-child-margin: 0 20px 0 20px;
 
 /* Import Base Theme */
-@import "app.scss" 
+@import "app.scss"  

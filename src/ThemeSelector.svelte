@@ -13,7 +13,7 @@
 
 <div class={className}>
   <i class="fa fa-palette" />
-  <select bind:value={theme} on:change={changeTheme}>
+  <select id="themeSelector" bind:value={theme} on:change={changeTheme}>
     {#each themes as item}
       <!-- content here -->
       <option value={item}>{item}</option>

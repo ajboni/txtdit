@@ -1,5 +1,5 @@
 /* Fonts */
-@import url("https://fonts.googleapis.com/css?family=Merriweather:300,400&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Martel+Sans:200,300,400&display=swap");
 /* Color definition */
 /* Main Section */
 /* Editor */
@@ -13,7 +13,7 @@
 /* Scroll Bars */
 /* Footer */
 body {
-  font-family: "Merriweather", serif;
+  font-family: "Martel Sans", sans-serif;
   font-size: 1.3rem;
   font-weight: 300;
 }
@@ -27,7 +27,7 @@ main {
   min-height: 100vh;
   flex-flow: column nowrap;
   box-sizing: border-box;
-  background-color: #eee0cb;
+  background-color: #dfd9e2;
   border: 0px;
   margin: 0px;
   padding: 0px;
@@ -41,11 +41,11 @@ main {
   background-color: inherit;
   border: none;
   border-right: none;
-  border-left: none;
+  border-left: 20px solid #89909f;
   border-top: none;
   border-bottom: none;
   padding: 0px;
-  margin: 0px;
+  margin: 10%;
 }
 
 .editor-text-container {
@@ -54,7 +54,7 @@ main {
   box-sizing: border-box;
   background-color: inherit;
   border: none;
-  padding: 0px;
+  padding: 50px;
   margin: 0px;
 }
 
@@ -69,22 +69,22 @@ main {
   resize: none;
   border: none;
   background-color: inherit;
-  color: black;
-  padding: 40px 80px 40px 80px;
+  color: #538083;
+  padding: 0px;
   margin: 0px;
-  scrollbar-color: #839788 #baa898;
-  scrollbar-width: auto;
+  scrollbar-color: #538083 #dfd9e2;
+  scrollbar-width: thin;
   font-size: 1.3rem;
   font-weight: 300;
   line-height: 1.6;
-  font-family: "Merriweather", serif;
+  font-family: "Martel Sans", sans-serif;
 }
 
 .footer-container {
-  background-color: #839788;
-  height: 30px;
-  color: #eee0cb;
-  font-size: 1rem;
+  background-color: #538083;
+  height: 35px;
+  color: #dfd9e2;
+  font-size: 1.1rem;
   display: flex;
   flex-direction: row;
   align-items: center;

@@ -40,6 +40,10 @@ main {
   box-sizing: border-box;
   background-color: inherit;
   border: 8px solid #a8a8a8;
+  border-right: none;
+  border-left: 8px solid #a8a8a8;
+  border-top: 8px solid #a8a8a8;
+  border-bottom: 8px solid #a8a8a8;
   padding: 0px;
   margin: 50px;
 }
@@ -68,8 +72,8 @@ main {
   color: #a8a8a8;
   padding: 40px;
   margin: 0px;
-  scrollbar-color: #a8a8a8 #0000a8;
-  scrollbar-width: thin;
+  scrollbar-color: #5e5e5e #a8a8a8;
+  scrollbar-width: 1;
   font-size: 1.2rem;
   font-weight: 800;
   line-height: 1.6;
@@ -117,4 +121,18 @@ select {
   font-size: inherit;
   font-weight: inherit;
   font-family: inherit;
+}
+
+main::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+  z-index: 2;
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none;
 }

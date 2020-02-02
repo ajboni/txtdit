@@ -1,0 +1,63 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css?family=Martel+Sans:200,300,400&display=swap');
+$primary-font-family: 'Martel Sans', sans-serif;
+
+
+// $primary-font: 'VT323', monospace;
+$primary-font-size: 1.3rem;
+$primary-font-weight: 300;
+
+/* Color definition */
+$color1: rgba(223, 217, 226, 1);
+$color2: rgba(195, 172, 206, 1);
+$color3: rgba(137, 144, 159, 1);
+$color4: rgba(83, 128, 131, 1);
+$color5: rgba(42, 127, 98, 1);
+
+
+/* Main Section */
+
+$main-bg-color: $color1;
+$main-border:  0px;
+$main-margin: 0px;
+$main-padding: 0px;
+
+/* Editor */
+$editor-container-margin: 10% ;
+$editor-container-padding: 0px;
+$editor-container-bg-color: inherit;
+$editor-container-border-left: 20px solid $color3;
+$editor-container-border-top: none;
+$editor-container-border-right: none;
+$editor-container-border-bottom: none;
+
+$editor-text-container-margin: 0px;
+$editor-text-container-padding: 50px; 
+$editor-text-container-bg-color: inherit;
+
+
+
+$editor-padding: 0px;
+$editor-margin: 0px;
+$editor-bg-color: inherit;
+$editor-color: $color4;
+$editor-font-size: $primary-font-size;
+$editor-font-weight: $primary-font-weight;
+
+/* Scroll Bars */
+$scrollbar-width: thin;
+$scrollbar-thumb-color: $color4;
+$scrollbar-track-color: $color1;
+
+/* Footer */
+$footer-height: 35px; 
+$footer-color: $color1;
+$footer-bg-color: $color4;
+$footer-font-size: 1.1rem; 
+$footer-font-weight: 500; 
+
+$footer-item-margin: 0 0 0 20px;
+$footer-item-first-child-margin: 0 20px 0 20px;
+
+/* Import Base Theme */
+@import "app.scss"  

@@ -1,15 +1,18 @@
 /* Fonts */
-@import url('https://fonts.googleapis.com/css?family=Noto+Serif+JP&display=swap');
-$primary-font-family: 'Noto Serif JP', serif;
-$primary-font-size: 1.3rem;
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&display=swap');
+$primary-font-family: 'Open Sans', sans-serif;
+
+
+// $primary-font: 'VT323', monospace;
+$primary-font-size: 1rem;
 $primary-font-weight: 400;
 
 /* Color definition */
-$color1: rgba(30, 30, 30, 1);
-$color2: rgba(191, 192, 192, 1);
-$color3: rgba(255, 255, 255, 1);
-$color4: rgba(239, 131, 84, 1);
-$color5: rgba(79, 93, 117, 1);
+$color1: #1e1e1e;
+$color2: #3c3c3c;
+$color3: #b0c0ca;
+$color4: #007acc;
+$color5: #f7f0f1;
 
 
 /* Main Section */
@@ -20,10 +23,12 @@ $main-margin: 0px;
 $main-padding: 0px;
 
 /* Editor */
-$editor-container-margin: 50px 10%;
+$editor-container-margin: 0px ;
 $editor-container-padding: 0px;
 $editor-container-bg-color: inherit;
 $editor-container-border: 1px solid $color2;
+$editor-container-border-top: none;
+$editor-container-border-bottom: none;
 
 $editor-text-container-margin: 0px;
 $editor-text-container-padding: 0px;
@@ -31,28 +36,27 @@ $editor-text-container-bg-color: inherit;
 $editor-text-container-border: none;
 
 
-$editor-padding: 20px 40px;
+$editor-padding: 40px;
 $editor-margin: 0px;
 $editor-bg-color: inherit;
-$editor-color: $color2;
+$editor-color: $color3;
 $editor-font-size: $primary-font-size;
 $editor-font-weight: $primary-font-weight;
-$editor-line-height: 1.6;
 
 /* Scroll Bars */
-$scrollbar-width: thin;
+$scrollbar-width: auto;
 $scrollbar-thumb-color: $color2;
-$scrollbar-track-color: $color5;
+$scrollbar-track-color: $color1;
 
 /* Footer */
-$footer-height: 35px; 
-$footer-color: $color3;
-$footer-bg-color: $color5;
-$footer-font-size: 1rem; 
-$footer-font-weight: 300; 
+$footer-height: 22px; 
+$footer-color: $color5;
+$footer-bg-color: $color4;
+$footer-font-size: .8rem; 
+$footer-font-weight: 400; 
 
 $footer-item-margin: 0 0 0 20px;
 $footer-item-first-child-margin: 0 20px 0 20px;
 
 /* Import Base Theme */
-@import "app.scss"
+@import "app.scss"  

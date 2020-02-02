@@ -23,6 +23,11 @@ $editor-container-margin: 10px  !default;
 $editor-container-padding: 0px !default;
 $editor-container-bg-color: inherit !default;
 $editor-container-border: none !default;
+$editor-container-border-right: $editor-container-border !default;
+$editor-container-border-left: $editor-container-border !default;
+$editor-container-border-top: $editor-container-border !default;
+$editor-container-border-bottom :$editor-container-border !default;
+
 
 $editor-text-container-bg-color: inherit !default;
 $editor-text-container-border: none !default;

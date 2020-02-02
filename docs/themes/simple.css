@@ -40,8 +40,12 @@ main {
   box-sizing: border-box;
   background-color: inherit;
   border: none;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  border-bottom: none;
   padding: 0px;
-  margin: 40px 80px;
+  margin: 0px;
 }
 
 .editor-text-container {
@@ -66,10 +70,10 @@ main {
   border: none;
   background-color: inherit;
   color: #1a535c;
-  padding: 40px;
+  padding: 40px 120px;
   margin: 0px;
-  scrollbar-color: #4ecdc4 #f7fff7;
-  scrollbar-width: thin;
+  scrollbar-color: #1a535c #ff6b6b;
+  scrollbar-width: 1;
   font-size: 1.3rem;
   font-weight: 500;
   line-height: 1.6;

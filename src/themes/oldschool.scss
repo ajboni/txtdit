@@ -25,24 +25,24 @@ $editor-container-margin: 50px;
 $editor-container-padding: 0px;
 $editor-container-bg-color: inherit;
 $editor-container-border: 8px solid $color2;
+$editor-container-border-right: none;
 
 $editor-text-container-margin: 0px;
 $editor-text-container-padding: 0px;
 $editor-text-container-bg-color: inherit;
 $editor-text-container-border: none;
 
-
-$editor-padding: 40px;
-$editor-margin: 0px;
+$editor-padding: 40px; 
+$editor-margin: 0px; 
 $editor-bg-color: inherit;
-$editor-color: $color2;
+$editor-color: $color2; 
 $editor-font-size: 1.2rem;
 $editor-font-weight: 800;
 
 /* Scroll Bars */
-$scrollbar-width: thin;
-$scrollbar-thumb-color: $color2;
-$scrollbar-track-color: $color5;
+$scrollbar-width: 1;
+$scrollbar-thumb-color: $color5;
+$scrollbar-track-color: $color2;
 
 /* Footer */
 $footer-height: 30px; 
@@ -55,4 +55,5 @@ $footer-item-margin: 0 0 0 20px;
 $footer-item-first-child-margin: 0 20px 0 20px;
 
 /* Import Base Theme */
-@import "app.scss" 
+@import "app.scss";
+@import "_scanlines";    

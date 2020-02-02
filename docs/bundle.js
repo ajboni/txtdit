@@ -4,6 +4,12 @@ var app = (function () {
     'use strict';
 
     function noop() { }
+    function assign(tar, src) {
+        // @ts-ignore
+        for (const k in src)
+            tar[k] = src[k];
+        return tar;
+    }
     function add_location(element, file, line, column, char) {
         element.__svelte_meta = {
             loc: { file, line, column, char }
@@ -23,6 +29,32 @@ var app = (function () {
     }
     function safe_not_equal(a, b) {
         return a != a ? b == b : a !== b || ((a && typeof a === 'object') || typeof a === 'function');
+    }
+    function create_slot(definition, ctx, $$scope, fn) {
+        if (definition) {
+            const slot_ctx = get_slot_context(definition, ctx, $$scope, fn);
+            return definition[0](slot_ctx);
+        }
+    }
+    function get_slot_context(definition, ctx, $$scope, fn) {
+        return definition[1] && fn
+            ? assign($$scope.ctx.slice(), definition[1](fn(ctx)))
+            : $$scope.ctx;
+    }
+    function get_slot_changes(definition, $$scope, dirty, fn) {
+        if (definition[2] && fn) {
+            const lets = definition[2](fn(dirty));
+            if (typeof $$scope.dirty === 'object') {
+                const merged = [];
+                const len = Math.max($$scope.dirty.length, lets.length);
+                for (let i = 0; i < len; i += 1) {
+                    merged[i] = $$scope.dirty[i] | lets[i];
+                }
+                return merged;
+            }
+            return $$scope.dirty | lets;
+        }
+        return $$scope.dirty;
     }
 
     function append(target, node) {
@@ -366,7 +398,11 @@ var app = (function () {
     	let t0;
     	let span;
     	let t1;
+    	let t2;
+    	let current;
     	let dispose;
+    	const default_slot_template = /*$$slots*/ ctx[5].default;
+    	const default_slot = create_slot(default_slot_template, ctx, /*$$scope*/ ctx[4], null);
 
     	const block = {
     		c: function create() {
@@ -375,14 +411,16 @@ var app = (function () {
     			t0 = space();
     			span = element("span");
     			t1 = text(/*caption*/ ctx[0]);
+    			t2 = space();
+    			if (default_slot) default_slot.c();
     			attr_dev(i, "class", /*icon*/ ctx[3]);
-    			add_location(i, file, 8, 2, 170);
-    			set_style(span, "padding", "0px 0px 0px 10px");
+    			add_location(i, file, 8, 2, 177);
+    			set_style(span, "padding", "0px 0px 0px 0px");
     			set_style(span, "top", "auto");
     			set_style(span, "bottom", "auto");
-    			add_location(span, file, 10, 2, 192);
+    			add_location(span, file, 10, 2, 199);
     			attr_dev(div, "class", /*className*/ ctx[2]);
-    			add_location(div, file, 7, 0, 124);
+    			add_location(div, file, 7, 0, 131);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -393,23 +431,42 @@ var app = (function () {
     			append_dev(div, t0);
     			append_dev(div, span);
     			append_dev(span, t1);
+    			append_dev(div, t2);
+
+    			if (default_slot) {
+    				default_slot.m(div, null);
+    			}
+
+    			current = true;
     			dispose = listen_dev(div, "click", /*callback*/ ctx[1], false, false, false);
     		},
     		p: function update(ctx, [dirty]) {
-    			if (dirty & /*icon*/ 8) {
+    			if (!current || dirty & /*icon*/ 8) {
     				attr_dev(i, "class", /*icon*/ ctx[3]);
     			}
 
-    			if (dirty & /*caption*/ 1) set_data_dev(t1, /*caption*/ ctx[0]);
+    			if (!current || dirty & /*caption*/ 1) set_data_dev(t1, /*caption*/ ctx[0]);
 
-    			if (dirty & /*className*/ 4) {
+    			if (default_slot && default_slot.p && dirty & /*$$scope*/ 16) {
+    				default_slot.p(get_slot_context(default_slot_template, ctx, /*$$scope*/ ctx[4], null), get_slot_changes(default_slot_template, /*$$scope*/ ctx[4], dirty, null));
+    			}
+
+    			if (!current || dirty & /*className*/ 4) {
     				attr_dev(div, "class", /*className*/ ctx[2]);
     			}
     		},
-    		i: noop,
-    		o: noop,
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(default_slot, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(default_slot, local);
+    			current = false;
+    		},
     		d: function destroy(detaching) {
     			if (detaching) detach_dev(div);
+    			if (default_slot) default_slot.d(detaching);
     			dispose();
     		}
     	};
@@ -427,7 +484,7 @@ var app = (function () {
 
     function instance($$self, $$props, $$invalidate) {
     	let { caption } = $$props;
-    	let { callback } = $$props;
+    	let { callback = null } = $$props;
     	let { className = "footer-item" } = $$props;
     	let { icon } = $$props;
     	const writable_props = ["caption", "callback", "className", "icon"];
@@ -436,11 +493,14 @@ var app = (function () {
     		if (!~writable_props.indexOf(key) && key.slice(0, 2) !== "$$") console.warn(`<FooterItem> was created with unknown prop '${key}'`);
     	});
 
+    	let { $$slots = {}, $$scope } = $$props;
+
     	$$self.$set = $$props => {
     		if ("caption" in $$props) $$invalidate(0, caption = $$props.caption);
     		if ("callback" in $$props) $$invalidate(1, callback = $$props.callback);
     		if ("className" in $$props) $$invalidate(2, className = $$props.className);
     		if ("icon" in $$props) $$invalidate(3, icon = $$props.icon);
+    		if ("$$scope" in $$props) $$invalidate(4, $$scope = $$props.$$scope);
     	};
 
     	$$self.$capture_state = () => {
@@ -454,7 +514,7 @@ var app = (function () {
     		if ("icon" in $$props) $$invalidate(3, icon = $$props.icon);
     	};
 
-    	return [caption, callback, className, icon];
+    	return [caption, callback, className, icon, $$scope, $$slots];
     }
 
     class FooterItem extends SvelteComponentDev {
@@ -480,10 +540,6 @@ var app = (function () {
 
     		if (/*caption*/ ctx[0] === undefined && !("caption" in props)) {
     			console.warn("<FooterItem> was created without expected prop 'caption'");
-    		}
-
-    		if (/*callback*/ ctx[1] === undefined && !("callback" in props)) {
-    			console.warn("<FooterItem> was created without expected prop 'callback'");
     		}
 
     		if (/*icon*/ ctx[3] === undefined && !("icon" in props)) {
@@ -524,18 +580,398 @@ var app = (function () {
     	}
     }
 
+    /* src/FooterItemClear.svelte generated by Svelte v3.18.1 */
+
+    function create_fragment$1(ctx) {
+    	let current;
+
+    	const footeritem = new FooterItem({
+    			props: {
+    				callback: clearEditor,
+    				caption: "Clear",
+    				icon: "fa fa-eraser"
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			create_component(footeritem.$$.fragment);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(footeritem, target, anchor);
+    			current = true;
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(footeritem.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(footeritem.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(footeritem, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$1.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function clearEditor() {
+    	const confirm = window.confirm("Delete all content from the editor?");
+    	if (!confirm) return;
+    	localStorage.removeItem("content");
+    	sessionStorage.removeItem("documentName");
+    	location.reload();
+    }
+
+    class FooterItemClear extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, null, create_fragment$1, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "FooterItemClear",
+    			options,
+    			id: create_fragment$1.name
+    		});
+    	}
+    }
+
+    /* src/FooterItemExport.svelte generated by Svelte v3.18.1 */
+
+    function create_fragment$2(ctx) {
+    	let current;
+
+    	const footeritem = new FooterItem({
+    			props: {
+    				callback: downloadFile,
+    				caption: "Export",
+    				icon: "fa fa-download"
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			create_component(footeritem.$$.fragment);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(footeritem, target, anchor);
+    			current = true;
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(footeritem.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(footeritem.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(footeritem, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$2.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function downloadFile() {
+    	const content = localStorage.getItem("content");
+
+    	if (!content) {
+    		return;
+    	}
+
+    	let documentName = sessionStorage.getItem("documentName");
+
+    	if (!documentName) {
+    		documentName = content.slice(0, 10);
+    	}
+
+    	var a = window.document.createElement("a");
+    	a.href = window.URL.createObjectURL(new Blob([content], { type: "text/plain" }));
+    	a.download = documentName;
+    	document.body.appendChild(a);
+    	a.click();
+    	document.body.removeChild(a);
+    }
+
+    class FooterItemExport extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, null, create_fragment$2, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "FooterItemExport",
+    			options,
+    			id: create_fragment$2.name
+    		});
+    	}
+    }
+
+    /* src/FooterItemImport.svelte generated by Svelte v3.18.1 */
+    const file$1 = "src/FooterItemImport.svelte";
+
+    // (16:0) <FooterItem   callback={() => {     document.getElementById('file-input').click();   }}   caption="Open"   icon="fa fa-upload">
+    function create_default_slot(ctx) {
+    	let input;
+    	let dispose;
+
+    	const block = {
+    		c: function create() {
+    			input = element("input");
+    			attr_dev(input, "id", "file-input");
+    			attr_dev(input, "type", "file");
+    			attr_dev(input, "name", "name");
+    			set_style(input, "display", "none");
+    			add_location(input, file$1, 21, 2, 524);
+    		},
+    		m: function mount(target, anchor) {
+    			insert_dev(target, input, anchor);
+    			dispose = listen_dev(input, "change", /*change_handler*/ ctx[1], false, false, false);
+    		},
+    		p: noop,
+    		d: function destroy(detaching) {
+    			if (detaching) detach_dev(input);
+    			dispose();
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_default_slot.name,
+    		type: "slot",
+    		source: "(16:0) <FooterItem   callback={() => {     document.getElementById('file-input').click();   }}   caption=\\\"Open\\\"   icon=\\\"fa fa-upload\\\">",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function create_fragment$3(ctx) {
+    	let current;
+
+    	const footeritem = new FooterItem({
+    			props: {
+    				callback: /*func*/ ctx[0],
+    				caption: "Open",
+    				icon: "fa fa-upload",
+    				$$slots: { default: [create_default_slot] },
+    				$$scope: { ctx }
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			create_component(footeritem.$$.fragment);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(footeritem, target, anchor);
+    			current = true;
+    		},
+    		p: function update(ctx, [dirty]) {
+    			const footeritem_changes = {};
+
+    			if (dirty & /*$$scope*/ 4) {
+    				footeritem_changes.$$scope = { dirty, ctx };
+    			}
+
+    			footeritem.$set(footeritem_changes);
+    		},
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(footeritem.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(footeritem.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(footeritem, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$3.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function openFile(e) {
+    	const textFile = e.target.files[0];
+    	const fr = new FileReader();
+
+    	fr.addEventListener("load", () => {
+    		localStorage.setItem("content", event.target.result);
+    		sessionStorage.setItem("documentName", textFile.name);
+    		location.reload();
+    	});
+
+    	fr.readAsText(textFile);
+    }
+
+    function instance$1($$self) {
+    	const func = () => {
+    		document.getElementById("file-input").click();
+    	};
+
+    	const change_handler = e => openFile(e);
+
+    	$$self.$capture_state = () => {
+    		return {};
+    	};
+
+    	$$self.$inject_state = $$props => {
+    		
+    	};
+
+    	return [func, change_handler];
+    }
+
+    class FooterItemImport extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, instance$1, create_fragment$3, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "FooterItemImport",
+    			options,
+    			id: create_fragment$3.name
+    		});
+    	}
+    }
+
+    /* src/FooterItemFullscreen.svelte generated by Svelte v3.18.1 */
+
+    function create_fragment$4(ctx) {
+    	let current;
+
+    	const footeritem = new FooterItem({
+    			props: {
+    				caption: "",
+    				icon: "fa fa-compress-arrows-alt",
+    				callback: toggleFullScreen
+    			},
+    			$$inline: true
+    		});
+
+    	const block = {
+    		c: function create() {
+    			create_component(footeritem.$$.fragment);
+    		},
+    		l: function claim(nodes) {
+    			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
+    		},
+    		m: function mount(target, anchor) {
+    			mount_component(footeritem, target, anchor);
+    			current = true;
+    		},
+    		p: noop,
+    		i: function intro(local) {
+    			if (current) return;
+    			transition_in(footeritem.$$.fragment, local);
+    			current = true;
+    		},
+    		o: function outro(local) {
+    			transition_out(footeritem.$$.fragment, local);
+    			current = false;
+    		},
+    		d: function destroy(detaching) {
+    			destroy_component(footeritem, detaching);
+    		}
+    	};
+
+    	dispatch_dev("SvelteRegisterBlock", {
+    		block,
+    		id: create_fragment$4.name,
+    		type: "component",
+    		source: "",
+    		ctx
+    	});
+
+    	return block;
+    }
+
+    function toggleFullScreen() {
+    	if (document.fullscreenElement) {
+    		document.exitFullscreen();
+    	} else {
+    		document.documentElement.requestFullscreen();
+    	}
+    }
+
+    class FooterItemFullscreen extends SvelteComponentDev {
+    	constructor(options) {
+    		super(options);
+    		init(this, options, null, create_fragment$4, safe_not_equal, {});
+
+    		dispatch_dev("SvelteRegisterComponent", {
+    			component: this,
+    			tagName: "FooterItemFullscreen",
+    			options,
+    			id: create_fragment$4.name
+    		});
+    	}
+    }
+
     const themes =
     	[
     		"default",
     		"oasis",
     		"oldschool",
-    		"simple"
+    		"saturday",
+    		"simple",
+    		"sunday",
+    		"narrow",
+    		"vscode",
+    		"vault76",
     	];
 
     /* src/ThemeSelector.svelte generated by Svelte v3.18.1 */
 
     const { console: console_1 } = globals;
-    const file$1 = "src/ThemeSelector.svelte";
+    const file$2 = "src/ThemeSelector.svelte";
 
     function get_each_context(ctx, list, i) {
     	const child_ctx = ctx.slice();
@@ -556,7 +992,7 @@ var app = (function () {
     			t = text(t_value);
     			option.__value = option_value_value = /*item*/ ctx[3];
     			option.value = option.__value;
-    			add_location(option, file$1, 18, 6, 483);
+    			add_location(option, file$2, 18, 6, 502);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, option, anchor);
@@ -579,7 +1015,7 @@ var app = (function () {
     	return block;
     }
 
-    function create_fragment$1(ctx) {
+    function create_fragment$5(ctx) {
     	let div;
     	let i;
     	let t;
@@ -604,11 +1040,12 @@ var app = (function () {
     			}
 
     			attr_dev(i, "class", "fa fa-palette");
-    			add_location(i, file$1, 14, 2, 340);
+    			add_location(i, file$2, 14, 2, 340);
+    			attr_dev(select, "id", "themeSelector");
     			if (/*theme*/ ctx[1] === void 0) add_render_callback(() => /*select_change_handler*/ ctx[2].call(select));
-    			add_location(select, file$1, 15, 2, 370);
+    			add_location(select, file$2, 15, 2, 370);
     			attr_dev(div, "class", /*className*/ ctx[0]);
-    			add_location(div, file$1, 13, 0, 314);
+    			add_location(div, file$2, 13, 0, 314);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -673,7 +1110,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$1.name,
+    		id: create_fragment$5.name,
     		type: "component",
     		source: "",
     		ctx
@@ -689,7 +1126,7 @@ var app = (function () {
     	location.reload();
     }
 
-    function instance$1($$self, $$props, $$invalidate) {
+    function instance$2($$self, $$props, $$invalidate) {
     	let { className = "footer-item" } = $$props;
     	let theme = localStorage.getItem("theme");
     	const writable_props = ["className"];
@@ -722,13 +1159,13 @@ var app = (function () {
     class ThemeSelector extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$1, create_fragment$1, safe_not_equal, { className: 0 });
+    		init(this, options, instance$2, create_fragment$5, safe_not_equal, { className: 0 });
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "ThemeSelector",
     			options,
-    			id: create_fragment$1.name
+    			id: create_fragment$5.name
     		});
     	}
 
@@ -742,9 +1179,9 @@ var app = (function () {
     }
 
     /* src/Footer.svelte generated by Svelte v3.18.1 */
-    const file$2 = "src/Footer.svelte";
+    const file$3 = "src/Footer.svelte";
 
-    function create_fragment$2(ctx) {
+    function create_fragment$6(ctx) {
     	let div0;
     	let t0;
     	let div1;
@@ -752,30 +1189,13 @@ var app = (function () {
     	let div2;
     	let t2;
     	let t3;
+    	let t4;
     	let current;
     	const themeselector = new ThemeSelector({ $$inline: true });
-
-    	const footeritem0 = new FooterItem({
-    			props: { caption: "Open", icon: "fa fa-upload" },
-    			$$inline: true
-    		});
-
-    	const footeritem1 = new FooterItem({
-    			props: {
-    				caption: "Export",
-    				icon: "fa fa-download"
-    			},
-    			$$inline: true
-    		});
-
-    	const footeritem2 = new FooterItem({
-    			props: {
-    				caption: "",
-    				icon: "fa fa-compress-arrows-alt",
-    				callback: toggleFullScreen
-    			},
-    			$$inline: true
-    		});
+    	const footeritemclear = new FooterItemClear({ $$inline: true });
+    	const footeritemimport = new FooterItemImport({ $$inline: true });
+    	const footeritemexport = new FooterItemExport({ $$inline: true });
+    	const footeritemfullscreen = new FooterItemFullscreen({ $$inline: true });
 
     	const block = {
     		c: function create() {
@@ -785,16 +1205,18 @@ var app = (function () {
     			div1 = element("div");
     			t1 = space();
     			div2 = element("div");
-    			create_component(footeritem0.$$.fragment);
+    			create_component(footeritemclear.$$.fragment);
     			t2 = space();
-    			create_component(footeritem1.$$.fragment);
+    			create_component(footeritemimport.$$.fragment);
     			t3 = space();
-    			create_component(footeritem2.$$.fragment);
-    			add_location(div0, file$2, 13, 0, 301);
+    			create_component(footeritemexport.$$.fragment);
+    			t4 = space();
+    			create_component(footeritemfullscreen.$$.fragment);
+    			add_location(div0, file$3, 9, 0, 368);
     			attr_dev(div1, "class", "footer-middle");
-    			add_location(div1, file$2, 16, 0, 334);
+    			add_location(div1, file$3, 12, 0, 401);
     			attr_dev(div2, "class", "footer-item-container");
-    			add_location(div2, file$2, 17, 0, 364);
+    			add_location(div2, file$3, 13, 0, 431);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -806,27 +1228,31 @@ var app = (function () {
     			insert_dev(target, div1, anchor);
     			insert_dev(target, t1, anchor);
     			insert_dev(target, div2, anchor);
-    			mount_component(footeritem0, div2, null);
+    			mount_component(footeritemclear, div2, null);
     			append_dev(div2, t2);
-    			mount_component(footeritem1, div2, null);
+    			mount_component(footeritemimport, div2, null);
     			append_dev(div2, t3);
-    			mount_component(footeritem2, div2, null);
+    			mount_component(footeritemexport, div2, null);
+    			append_dev(div2, t4);
+    			mount_component(footeritemfullscreen, div2, null);
     			current = true;
     		},
     		p: noop,
     		i: function intro(local) {
     			if (current) return;
     			transition_in(themeselector.$$.fragment, local);
-    			transition_in(footeritem0.$$.fragment, local);
-    			transition_in(footeritem1.$$.fragment, local);
-    			transition_in(footeritem2.$$.fragment, local);
+    			transition_in(footeritemclear.$$.fragment, local);
+    			transition_in(footeritemimport.$$.fragment, local);
+    			transition_in(footeritemexport.$$.fragment, local);
+    			transition_in(footeritemfullscreen.$$.fragment, local);
     			current = true;
     		},
     		o: function outro(local) {
     			transition_out(themeselector.$$.fragment, local);
-    			transition_out(footeritem0.$$.fragment, local);
-    			transition_out(footeritem1.$$.fragment, local);
-    			transition_out(footeritem2.$$.fragment, local);
+    			transition_out(footeritemclear.$$.fragment, local);
+    			transition_out(footeritemimport.$$.fragment, local);
+    			transition_out(footeritemexport.$$.fragment, local);
+    			transition_out(footeritemfullscreen.$$.fragment, local);
     			current = false;
     		},
     		d: function destroy(detaching) {
@@ -836,15 +1262,16 @@ var app = (function () {
     			if (detaching) detach_dev(div1);
     			if (detaching) detach_dev(t1);
     			if (detaching) detach_dev(div2);
-    			destroy_component(footeritem0);
-    			destroy_component(footeritem1);
-    			destroy_component(footeritem2);
+    			destroy_component(footeritemclear);
+    			destroy_component(footeritemimport);
+    			destroy_component(footeritemexport);
+    			destroy_component(footeritemfullscreen);
     		}
     	};
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$2.name,
+    		id: create_fragment$6.name,
     		type: "component",
     		source: "",
     		ctx
@@ -853,31 +1280,23 @@ var app = (function () {
     	return block;
     }
 
-    function toggleFullScreen() {
-    	if (document.fullscreenElement) {
-    		document.exitFullscreen();
-    	} else {
-    		document.documentElement.requestFullscreen();
-    	}
-    }
-
     class Footer extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, null, create_fragment$2, safe_not_equal, {});
+    		init(this, options, null, create_fragment$6, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Footer",
     			options,
-    			id: create_fragment$2.name
+    			id: create_fragment$6.name
     		});
     	}
     }
 
     /* src/Dropzone.svelte generated by Svelte v3.18.1 */
 
-    function create_fragment$3(ctx) {
+    function create_fragment$7(ctx) {
     	const block = {
     		c: noop,
     		l: function claim(nodes) {
@@ -892,7 +1311,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$3.name,
+    		id: create_fragment$7.name,
     		type: "component",
     		source: "",
     		ctx
@@ -901,7 +1320,7 @@ var app = (function () {
     	return block;
     }
 
-    function instance$2($$self) {
+    function instance$3($$self) {
     	onMount(() => {
     		let dropArea = document.getElementById("main");
 
@@ -963,21 +1382,21 @@ var app = (function () {
     class Dropzone extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$2, create_fragment$3, safe_not_equal, {});
+    		init(this, options, instance$3, create_fragment$7, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Dropzone",
     			options,
-    			id: create_fragment$3.name
+    			id: create_fragment$7.name
     		});
     	}
     }
 
     /* src/Editor.svelte generated by Svelte v3.18.1 */
-    const file$3 = "src/Editor.svelte";
+    const file$4 = "src/Editor.svelte";
 
-    function create_fragment$4(ctx) {
+    function create_fragment$8(ctx) {
     	let div;
     	let textarea;
     	let t;
@@ -995,9 +1414,9 @@ var app = (function () {
     			attr_dev(textarea, "id", "editor");
     			attr_dev(textarea, "cols", "30");
     			attr_dev(textarea, "rows", "10");
-    			add_location(textarea, file$3, 23, 2, 582);
+    			add_location(textarea, file$4, 23, 2, 582);
     			attr_dev(div, "class", "editor-text-container");
-    			add_location(div, file$3, 22, 0, 544);
+    			add_location(div, file$4, 22, 0, 544);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1039,7 +1458,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$4.name,
+    		id: create_fragment$8.name,
     		type: "component",
     		source: "",
     		ctx
@@ -1058,7 +1477,7 @@ var app = (function () {
     	}
     }
 
-    function instance$3($$self, $$props, $$invalidate) {
+    function instance$4($$self, $$props, $$invalidate) {
     	let content = localStorage.getItem("content");
 
     	function saveContent(e) {
@@ -1084,21 +1503,21 @@ var app = (function () {
     class Editor extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$3, create_fragment$4, safe_not_equal, {});
+    		init(this, options, instance$4, create_fragment$8, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "Editor",
     			options,
-    			id: create_fragment$4.name
+    			id: create_fragment$8.name
     		});
     	}
     }
 
     /* src/App.svelte generated by Svelte v3.18.1 */
-    const file$4 = "src/App.svelte";
+    const file$5 = "src/App.svelte";
 
-    function create_fragment$5(ctx) {
+    function create_fragment$9(ctx) {
     	let main;
     	let div0;
     	let t;
@@ -1116,11 +1535,11 @@ var app = (function () {
     			div1 = element("div");
     			create_component(footer.$$.fragment);
     			attr_dev(div0, "class", "editor-container");
-    			add_location(div0, file$4, 26, 2, 717);
+    			add_location(div0, file$5, 31, 2, 885);
     			attr_dev(div1, "class", "footer-container");
-    			add_location(div1, file$4, 29, 2, 774);
+    			add_location(div1, file$5, 34, 2, 942);
     			attr_dev(main, "id", "main");
-    			add_location(main, file$4, 25, 0, 698);
+    			add_location(main, file$5, 30, 0, 866);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -1155,7 +1574,7 @@ var app = (function () {
 
     	dispatch_dev("SvelteRegisterBlock", {
     		block,
-    		id: create_fragment$5.name,
+    		id: create_fragment$9.name,
     		type: "component",
     		source: "",
     		ctx
@@ -1167,7 +1586,7 @@ var app = (function () {
     const path = "/themes/";
     const ext = ".css";
 
-    function instance$4($$self) {
+    function instance$5($$self) {
     	let themeLoaded = false;
     	let themeName = localStorage.getItem("theme");
     	let theme = `${path}${themeName}${ext}`;
@@ -1195,13 +1614,13 @@ var app = (function () {
     class App extends SvelteComponentDev {
     	constructor(options) {
     		super(options);
-    		init(this, options, instance$4, create_fragment$5, safe_not_equal, {});
+    		init(this, options, instance$5, create_fragment$9, safe_not_equal, {});
 
     		dispatch_dev("SvelteRegisterComponent", {
     			component: this,
     			tagName: "App",
     			options,
-    			id: create_fragment$5.name
+    			id: create_fragment$9.name
     		});
     	}
     }

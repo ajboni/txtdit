@@ -1,14 +1,10 @@
 <script>
   import FooterItem from "./FooterItem.svelte";
+  import FooterItemClear from "./FooterItemClear.svelte";
+  import FooterItemExport from "./FooterItemExport.svelte";
+  import FooterItemImport from "./FooterItemImport.svelte";
+  import FooterItemFullscreen from "./FooterItemFullscreen.svelte";
   import ThemeSelector from "./ThemeSelector.svelte";
-
-  function toggleFullScreen() {
-    if (document.fullscreenElement) {
-      document.exitFullscreen();
-    } else {
-      document.documentElement.requestFullscreen();
-    }
-  }
 </script>
 
 <div>
@@ -16,12 +12,9 @@
 </div>
 <div class="footer-middle" />
 <div class="footer-item-container">
-
-  <FooterItem caption="Open" icon="fa fa-upload" />
-  <FooterItem caption="Export" icon="fa fa-download" />
-  <FooterItem
-    caption=""
-    icon="fa fa-compress-arrows-alt"
-    callback={toggleFullScreen} />
+  <FooterItemClear />
+  <FooterItemImport />
+  <FooterItemExport />
+  <FooterItemFullscreen />
 </div>
 <!-- <FooterItem caption="Words" icon="fa fa-tachometer-alt" /> -->

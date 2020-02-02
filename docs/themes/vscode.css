@@ -1,5 +1,5 @@
 /* Fonts */
-@import url("https://fonts.googleapis.com/css?family=Merriweather:300,400&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,600&display=swap");
 /* Color definition */
 /* Main Section */
 /* Editor */
@@ -13,9 +13,9 @@
 /* Scroll Bars */
 /* Footer */
 body {
-  font-family: "Merriweather", serif;
-  font-size: 1.3rem;
-  font-weight: 300;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
 }
 
 main.highlight {
@@ -27,7 +27,7 @@ main {
   min-height: 100vh;
   flex-flow: column nowrap;
   box-sizing: border-box;
-  background-color: #eee0cb;
+  background-color: #1e1e1e;
   border: 0px;
   margin: 0px;
   padding: 0px;
@@ -39,9 +39,9 @@ main {
   display: flex;
   box-sizing: border-box;
   background-color: inherit;
-  border: none;
-  border-right: none;
-  border-left: none;
+  border: 1px solid #3c3c3c;
+  border-right: 1px solid #3c3c3c;
+  border-left: 1px solid #3c3c3c;
   border-top: none;
   border-bottom: none;
   padding: 0px;
@@ -69,22 +69,22 @@ main {
   resize: none;
   border: none;
   background-color: inherit;
-  color: black;
-  padding: 40px 80px 40px 80px;
+  color: #b0c0ca;
+  padding: 40px;
   margin: 0px;
-  scrollbar-color: #839788 #baa898;
+  scrollbar-color: #3c3c3c #1e1e1e;
   scrollbar-width: auto;
-  font-size: 1.3rem;
-  font-weight: 300;
+  font-size: 1rem;
+  font-weight: 400;
   line-height: 1.6;
-  font-family: "Merriweather", serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 .footer-container {
-  background-color: #839788;
-  height: 30px;
-  color: #eee0cb;
-  font-size: 1rem;
+  background-color: #007acc;
+  height: 22px;
+  color: #f7f0f1;
+  font-size: 0.8rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -92,7 +92,7 @@ main {
 
 .footer-item {
   margin: 0 0 0 20px;
-  font-weight: 500;
+  font-weight: 400;
   cursor: pointer;
   background-color: inherit;
 }

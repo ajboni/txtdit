@@ -6,7 +6,7 @@ Main features:
 
 * No text formatting
 * Multiple Themes
-* Import/export files
+* Import/export plain text file.
 * Autosave current document
 * No more features
 

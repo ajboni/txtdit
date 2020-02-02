@@ -3,7 +3,12 @@ const themes =
 		"default",
 		"oasis",
 		"oldschool",
-		"simple"
+		"saturday",
+		"simple",
+		"sunday",
+		"narrow",
+		"vscode",
+		"vault76",
 	]
 
 export default themes;

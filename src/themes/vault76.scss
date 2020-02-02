@@ -1,0 +1,60 @@
+/* Fonts */
+@import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono&display=swap" rel="stylesheet');
+$primary-font-family: 'Share Tech Mono', monospace;
+
+$primary-font-size: 1.5rem;
+$primary-font-weight: 600;
+
+/* Color definition */
+$color1: #081a0d;
+$color2: #3c3c3c;
+$color3: #3ef78b;
+$color4: #007acc;
+$color5: #f7f0f1;
+
+
+/* Main Section */
+
+$main-bg-color: $color1;
+$main-border:  0px;
+$main-margin: 0px;
+$main-padding: 0px;
+
+/* Editor */
+$editor-container-margin: 0px ;
+$editor-container-padding: 0px;
+$editor-container-bg-color: inherit;
+$editor-container-border: none;
+
+$editor-text-container-margin: 0px;
+$editor-text-container-padding: 0px;
+$editor-text-container-bg-color: inherit;
+$editor-text-container-border: none;
+
+
+$editor-padding: 100px;
+$editor-margin: 0px;
+$editor-bg-color: inherit;
+$editor-color: $color3;
+$editor-font-size: $primary-font-size;
+$editor-font-weight: $primary-font-weight;
+$editor-line-height: 1.2;
+/* Scroll Bars */
+$scrollbar-width: auto;
+$scrollbar-thumb-color: $color2;
+$scrollbar-track-color: $color1;
+
+/* Footer */
+$footer-height: 30px; 
+$footer-color: $color1;
+$footer-bg-color: $color3;
+$footer-font-size: 1.3rem; 
+$footer-font-weight: 400; 
+
+$footer-item-margin: 0 0 0 20px;
+$footer-item-first-child-margin: 0 20px 0 20px;
+
+
+/* Import Base Theme */
+@import "app.scss"; 
+@import "_scanlines";

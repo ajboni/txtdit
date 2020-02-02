@@ -20,7 +20,7 @@ $main-margin: 0px;
 $main-padding: 0px;
 
 /* Editor */
-$editor-container-margin: 40px 80px;
+$editor-container-margin: 0px;
 $editor-container-padding: 0px;
 $editor-container-bg-color: inherit;
 $editor-container-border: none;
@@ -31,7 +31,7 @@ $editor-text-container-bg-color: inherit;
 $editor-text-container-border: none;
 
 
-$editor-padding: 40px;
+$editor-padding: 40px 80px 40px 80px;
 $editor-margin: 0px;
 $editor-bg-color: inherit;
 $editor-color: $color1;
@@ -39,9 +39,9 @@ $editor-font-size:  $primary-font-size;
 $editor-font-weight: $primary-font-weight;
 
 /* Scroll Bars */
-$scrollbar-width: thin;
-$scrollbar-thumb-color: $color2;
-$scrollbar-track-color: $color5;
+$scrollbar-width: auto;
+$scrollbar-thumb-color: $color4;
+$scrollbar-track-color: $color2;
 
 /* Footer */
 $footer-height: 30px; 

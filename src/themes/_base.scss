@@ -21,6 +21,7 @@ main {
 	padding:$main-padding;
 }
 
+
 .editor-container {
 	flex-grow: 1;
 	flex: 2;
@@ -28,6 +29,10 @@ main {
 	box-sizing: border-box;
 	background-color: $editor-container-bg-color;
 	border: $editor-container-border;
+	border-right: $editor-container-border-right;
+	border-left: $editor-container-border-left;
+	border-top: $editor-container-border-top;
+	border-bottom: $editor-container-border-bottom;
 	padding: $editor-container-padding;
 	margin: $editor-container-margin;
 }
@@ -55,7 +60,7 @@ main {
 	color: $editor-color;
 	padding: $editor-padding;
 	margin: $editor-margin;
-	scrollbar-color:  $color2 $main-bg-color;
+	scrollbar-color:   $scrollbar-thumb-color $scrollbar-track-color;
 	scrollbar-width: $scrollbar-width;
 	font-size: $editor-font-size;
 	font-weight: $editor-font-weight;
