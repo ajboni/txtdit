@@ -5,6 +5,7 @@ import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import sass from 'rollup-plugin-sass'
 import { writeFileSync } from 'fs';
+import json from '@rollup/plugin-json';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -17,7 +18,7 @@ export default {
 		file: 'docs/bundle.js'
 	},
 	plugins: [
-
+		json(),
 		svelte({
 			// enable run-time checks when not in production
 			dev: !production,
