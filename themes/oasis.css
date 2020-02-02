@@ -1,0 +1,124 @@
+/* Fonts */
+@import url("https://fonts.googleapis.com/css?family=Merriweather:300,400&display=swap");
+/* Color definition */
+/* Main Section */
+/* Editor */
+/* Scroll Bars */
+/* Footer */
+/* Import Base Theme */
+/* Fonts */
+@import url("https://fonts.googleapis.com/css?family=Roboto+Mono:700|VT323&display=swap");
+/* Color definition */
+/* Implementation */
+/* Scroll Bars */
+/* Footer */
+body {
+  font-family: "Merriweather", serif;
+  font-size: 1.3rem;
+  font-weight: 300;
+}
+
+main.highlight {
+  border: 10px dashed #a6ca5d;
+}
+
+main {
+  display: flex;
+  min-height: 100vh;
+  flex-flow: column nowrap;
+  box-sizing: border-box;
+  background-color: #eee0cb;
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.editor-container {
+  flex-grow: 1;
+  flex: 2;
+  display: flex;
+  box-sizing: border-box;
+  background-color: inherit;
+  border: none;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  border-bottom: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+.editor-text-container {
+  flex-grow: 1;
+  flex: 2;
+  box-sizing: border-box;
+  background-color: inherit;
+  border: none;
+  padding: 0px;
+  margin: 0px;
+}
+
+#editor {
+  width: 100%;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box;
+  resize: none;
+  border: none;
+  background-color: inherit;
+  color: black;
+  padding: 40px 80px 40px 80px;
+  margin: 0px;
+  scrollbar-color: #839788 #baa898;
+  scrollbar-width: auto;
+  font-size: 1.3rem;
+  font-weight: 300;
+  line-height: 1.6;
+  font-family: "Merriweather", serif;
+}
+
+.footer-container {
+  background-color: #839788;
+  height: 30px;
+  color: #eee0cb;
+  font-size: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.footer-item {
+  margin: 0 0 0 20px;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: inherit;
+}
+
+.footer-item-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.footer-middle {
+  flex: 1;
+}
+
+.footer-item:last-child {
+  margin: 0 20px 0 20px;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-overflow: "";
+  background: inherit;
+  color: inherit;
+  border: none;
+  font-size: inherit;
+  font-weight: inherit;
+  font-family: inherit;
+}
