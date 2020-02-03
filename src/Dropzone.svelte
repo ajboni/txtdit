@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  import { content, documentName } from "./store.js";
 
   onMount(() => {
     let dropArea = document.getElementById("main");
@@ -32,16 +33,18 @@
     function readFile(event) {
       // textarea.textContent = event.target.result;
       localStorage.setItem("content", event.target.result);
-      location.reload();
+      content.set(event.target.result);
     }
     function handleDrop(e) {
       let dt = e.dataTransfer;
       let file = dt.files[0];
+      localStorage.setItem("documentName", file.name);
+      documentName.set(file.name);
+      console.log(file.name);
       const objectURL = window.URL.createObjectURL(file);
       const fr = new FileReader();
       fr.addEventListener("load", readFile);
       fr.readAsText(file);
-      // handleFiles(files);
     }
   });
 </script>

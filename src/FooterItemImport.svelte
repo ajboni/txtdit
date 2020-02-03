@@ -1,5 +1,6 @@
 <script>
   import FooterItem from "./FooterItem.svelte";
+  import { content, documentName } from "./store.js";
 
   function openFile(e) {
     const textFile = e.target.files[0];
@@ -7,7 +8,8 @@
     fr.addEventListener("load", () => {
       localStorage.setItem("content", event.target.result);
       sessionStorage.setItem("documentName", textFile.name);
-      location.reload();
+      content.set(event.target.result);
+      documentName.set(textFile.name);
     });
     fr.readAsText(textFile);
   }

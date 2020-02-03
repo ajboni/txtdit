@@ -1,9 +1,9 @@
 <script>
   import Dropzone from "./Dropzone.svelte";
-  let content = localStorage.getItem("content");
+  import { content } from "./store.js";
 
   function saveContent(e) {
-    localStorage.setItem("content", content);
+    localStorage.setItem("content", e.target.value);
   }
 
   function handleInput(e) {
@@ -22,7 +22,7 @@
 
 <div class="editor-text-container">
   <textarea
-    bind:value={content}
+    bind:value={$content}
     on:keydown={handleInput}
     on:keyup={saveContent}
     name="editor"

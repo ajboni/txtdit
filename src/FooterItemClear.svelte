@@ -1,12 +1,14 @@
 <script>
   import FooterItem from "./FooterItem.svelte";
+  import { content, documentName } from "./store.js";
 
   function clearEditor() {
     const confirm = window.confirm("Delete all content from the editor?");
     if (!confirm) return;
     localStorage.removeItem("content");
     sessionStorage.removeItem("documentName");
-    location.reload();
+    content.set("");
+    documentName.set("");
   }
 </script>
 
