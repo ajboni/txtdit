@@ -35,8 +35,8 @@ By default, the server will only respond to requests from localhost. To allow co
 1. Add theme source in src/theme/ (eg: newTheme.scss)
 2. At the bottom of the theme add `import "app.scss";`
 3. Include the theme name (filename) in theme-list.js
-4. To automatically generate css, add to app.svelte `import "./themes/newTheme.scss"`;
-5. run the project, your css will be added in the docs/themes folder
+4. To automatically generate css, add to `main.js`: `import "./themes/newTheme.scss"`;
+5. run the project, your css will be added in the public/themes folder
 
 If a new variable is added, you should add a default value in `_defaults.scss` otherwise it will throw error on themes not using it.
 
