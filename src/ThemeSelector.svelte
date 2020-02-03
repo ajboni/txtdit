@@ -12,7 +12,11 @@
 
 <FooterItem caption="" icon="fa fa-palette">
 
-  <select id="themeSelector" on:change={changeTheme} style="cursor: pointer">
+  <select
+    id="themeSelector"
+    on:change={changeTheme}
+    bind:value={$theme}
+    style="cursor: pointer">
     {#each themes as item}
       <!-- content here -->
       <option value={item}>{item}</option>
