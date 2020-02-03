@@ -1,6 +1,6 @@
 <script>
   import themes from "./themes/theme-list";
-  export let className = "footer-item";
+  import FooterItem from "./FooterItem.svelte";
   let theme = localStorage.getItem("theme");
 
   function changeTheme(e) {
@@ -11,12 +11,16 @@
   }
 </script>
 
-<div class={className}>
-  <i class="fa fa-palette" />
-  <select id="themeSelector" bind:value={theme} on:change={changeTheme}>
+<FooterItem caption="" icon="fa fa-palette">
+
+  <select
+    id="themeSelector"
+    bind:value={theme}
+    on:change={changeTheme}
+    style="cursor: pointer">
     {#each themes as item}
       <!-- content here -->
       <option value={item}>{item}</option>
     {/each}
   </select>
-</div>
+</FooterItem>

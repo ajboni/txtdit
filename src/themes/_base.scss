@@ -1,9 +1,13 @@
+/* turn it off completely */
+*:active, *:hover {
+	outline: none
+ }
+ 
+
 body {
 	font-family: $primary-font-family;
 	font-size: $primary-font-size;
 	font-weight: $primary-font-weight;
-
-
 }
 
 main.highlight {
@@ -68,6 +72,15 @@ main {
 	font-family: $primary-font-family;
 }
 
+#editor::-webkit-scrollbar-thumb {
+	background-color:  $scrollbar-thumb-color;
+}
+
+#editor::-webkit-scrollbar {
+	width: 10px;
+	background-color: $scrollbar-track-color;
+}
+
 .footer-container {
 	background-color: $footer-bg-color;
 	height: $footer-height;
@@ -115,8 +128,8 @@ select {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	text-overflow: '';
-	background: inherit;
-	color: inherit;
+	background: $footer-bg-color;
+	color: $footer-color;
 	border: none;
 	font-size: inherit;
 	font-weight: inherit;
