@@ -12,6 +12,11 @@
 /* Implementation */
 /* Scroll Bars */
 /* Footer */
+/* turn it off completely */
+*:active, *:hover {
+  outline: none;
+}
+
 body {
   font-family: "Noto Serif JP", serif;
   font-size: 1.3rem;
@@ -80,6 +85,15 @@ main {
   font-family: "Noto Serif JP", serif;
 }
 
+#editor::-webkit-scrollbar-thumb {
+  background-color: #bfc0c0;
+}
+
+#editor::-webkit-scrollbar {
+  width: 10px;
+  background-color: #4f5d75;
+}
+
 .footer-container {
   background-color: #4f5d75;
   height: 35px;
@@ -124,8 +138,8 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   text-overflow: "";
-  background: inherit;
-  color: inherit;
+  background: #4f5d75;
+  color: white;
   border: none;
   font-size: inherit;
   font-weight: inherit;

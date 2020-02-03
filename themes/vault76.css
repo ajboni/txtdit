@@ -12,6 +12,11 @@
 /* Implementation */
 /* Scroll Bars */
 /* Footer */
+/* turn it off completely */
+*:active, *:hover {
+  outline: none;
+}
+
 body {
   font-family: "Share Tech Mono", monospace;
   font-size: 1.5rem;
@@ -80,6 +85,15 @@ main {
   font-family: "Share Tech Mono", monospace;
 }
 
+#editor::-webkit-scrollbar-thumb {
+  background-color: #3c3c3c;
+}
+
+#editor::-webkit-scrollbar {
+  width: 10px;
+  background-color: #081a0d;
+}
+
 .footer-container {
   background-color: #3ef78b;
   height: 30px;
@@ -124,8 +138,8 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   text-overflow: "";
-  background: inherit;
-  color: inherit;
+  background: #3ef78b;
+  color: #081a0d;
   border: none;
   font-size: inherit;
   font-weight: inherit;

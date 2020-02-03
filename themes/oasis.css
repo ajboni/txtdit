@@ -12,6 +12,11 @@
 /* Implementation */
 /* Scroll Bars */
 /* Footer */
+/* turn it off completely */
+*:active, *:hover {
+  outline: none;
+}
+
 body {
   font-family: "Merriweather", serif;
   font-size: 1.3rem;
@@ -80,6 +85,15 @@ main {
   font-family: "Merriweather", serif;
 }
 
+#editor::-webkit-scrollbar-thumb {
+  background-color: #839788;
+}
+
+#editor::-webkit-scrollbar {
+  width: 10px;
+  background-color: #baa898;
+}
+
 .footer-container {
   background-color: #839788;
   height: 30px;
@@ -124,8 +138,8 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   text-overflow: "";
-  background: inherit;
-  color: inherit;
+  background: #839788;
+  color: #eee0cb;
   border: none;
   font-size: inherit;
   font-weight: inherit;
