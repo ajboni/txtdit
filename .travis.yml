@@ -3,8 +3,14 @@ node_js:
   - lts/*
 
 script:
+  - curl -L -o butler.zip https://broth.itch.ovh/butler/linux-amd64/LATEST/archive/default
+  - unzip butler.zip
+  - chmod +x butler
+  - ./butler -V
+  - rm butler.zip
   - npm install
   - npm run build
+  - ./butler push public baj/txtdit:html5
  
 deploy:
   local_dir: public
