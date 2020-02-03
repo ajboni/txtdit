@@ -4,8 +4,11 @@ import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import sass from 'rollup-plugin-sass'
-import { writeFileSync } from 'fs';
+import { writeFileSync, mkdirSync, existsSync } from 'fs';
 import json from '@rollup/plugin-json';
+import image from '@rollup/plugin-image';
+import copy from 'rollup-plugin-copy'
+
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -15,9 +18,14 @@ export default {
 		sourcemap: true,
 		format: 'iife',
 		name: 'app',
-		file: 'docs/bundle.js'
+		file: 'public/bundle.js'
 	},
 	plugins: [
+		copy({
+			targets: [
+				{ src: 'src/public/**/*', dest: 'public' },
+			]
+		}),
 		json(),
 		svelte({
 			// enable run-time checks when not in production
@@ -25,7 +33,7 @@ export default {
 			// we'll extract any component CSS out into
 			// a separate file — better for performance
 			css: css => {
-				css.write('docs/bundle.css');
+				css.write('public/bundle.css');
 			},
 			// preprocess: autoPreprocess({ /* options */ })
 		}),
@@ -34,7 +42,10 @@ export default {
 				styleNodes.forEach(node => {
 					let filename = node.id.replace(/^.*[\\\/]/, '')
 					filename = filename.replace("scss", "css")
-					writeFileSync('docs/themes/' + filename, node.content)
+					if (!existsSync('public/themes')) {
+						mkdirSync('public/themes', { recursive: true })
+					}
+					writeFileSync('public/themes/' + filename, node.content)
 
 				});
 
@@ -56,9 +67,9 @@ export default {
 		// the bundle has been generated
 		!production && serve(),
 
-		// Watch the `docs` directory and refresh the
+		// Watch the `public` directory and refresh the
 		// browser on changes when not in production
-		!production && livereload('docs'),
+		!production && livereload('public'),
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify

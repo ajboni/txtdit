@@ -8,7 +8,7 @@
 <div class={className} on:click={callback}>
   <i class={icon} />
 
-  <span style="padding: 0px 0px 0px 0px; top: auto; bottom:auto">
+  <span style="padding: 0px 0px 0px 5px; top: auto; bottom:auto">
     {caption}
   </span>
   <slot />

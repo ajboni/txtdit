@@ -4,19 +4,22 @@
 	"description": "Featureless themeable text editor. https://txtdit.aboni.dev",
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/ajboni/txtdit.git"
+		"url": "git://github.com/ajboni/txtdit.git",
+		"repo_url": "https://github.com/ajboni/txtdit"
 	},
-	"license": "GNU AGPLv3",
+	"license": "GPL-3.0-or-later",
 	"scripts": {
 		"build": "rollup -c",
 		"dev": "rollup -c -w",
-		"start": "sirv docs"
+		"start": "sirv public"
 	},
 	"devDependencies": {
 		"@rollup/plugin-commonjs": "^11.0.0",
+		"@rollup/plugin-image": "^2.0.2",
 		"@rollup/plugin-json": "^4.0.2",
 		"@rollup/plugin-node-resolve": "^7.0.0",
 		"rollup": "^1.20.0",
+		"rollup-plugin-copy": "^3.3.0",
 		"rollup-plugin-livereload": "^1.0.0",
 		"rollup-plugin-sass": "^1.2.2",
 		"rollup-plugin-scss": "^2.1.0",

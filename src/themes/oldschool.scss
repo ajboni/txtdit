@@ -32,7 +32,7 @@ $editor-text-container-bg-color: inherit;
 $editor-text-container-border: none;
 
 $editor-padding: 40px; 
-$editor-margin: 0px; 
+$editor-margin: 0px;
 $editor-bg-color: inherit;
 $editor-color: $color2; 
 $editor-font-size: 1.2rem;
@@ -53,6 +53,6 @@ $footer-font-weight: 500;
 $footer-item-margin: 0 0 0 20px;
 $footer-item-first-child-margin: 0 20px 0 20px;
 
-/* Import Base Theme */
+/* Import Base Theme */ 
 @import "app.scss";
-@import "_scanlines";    
+@import "_scanlines";

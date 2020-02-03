@@ -6,14 +6,16 @@
   import FooterItemFullscreen from "./FooterItemFullscreen.svelte";
   import ThemeSelector from "./ThemeSelector.svelte";
   import pkg from "../package.json";
-  console.log(`running version ${pkg.version}`);
 </script>
 
 <div class="footer-item-container">
   <ThemeSelector />
 </div>
 <div class="footer-middle">
-  <FooterItem caption={pkg.version} icon="fa fa-code-branch" />
+  <FooterItem
+    caption={pkg.version}
+    icon="fab fa-github"
+    callback={() => window.open(pkg.repository.repo_url, '_blank')} />
 </div>
 <div class="footer-item-container">
   <FooterItemClear />
