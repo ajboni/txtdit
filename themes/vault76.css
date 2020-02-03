@@ -95,16 +95,25 @@ main {
   font-weight: 400;
   cursor: pointer;
   background-color: inherit;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }
 
 .footer-item-container {
   display: flex;
   flex-direction: row;
   align-items: center;
+  height: 100%;
 }
 
 .footer-middle {
   flex: 1;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
 }
 
 .footer-item:last-child {

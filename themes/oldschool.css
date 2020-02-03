@@ -40,7 +40,7 @@ main {
   box-sizing: border-box;
   background-color: inherit;
   border: 8px solid #a8a8a8;
-  border-right: none;
+  border-right: 8px solid #a8a8a8;
   border-left: 8px solid #a8a8a8;
   border-top: 8px solid #a8a8a8;
   border-bottom: 8px solid #a8a8a8;
@@ -95,16 +95,25 @@ main {
   font-weight: 500;
   cursor: pointer;
   background-color: inherit;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
 }
 
 .footer-item-container {
   display: flex;
   flex-direction: row;
   align-items: center;
+  height: 100%;
 }
 
 .footer-middle {
   flex: 1;
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 100%;
 }
 
 .footer-item:last-child {
