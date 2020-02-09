@@ -96,12 +96,13 @@ main {
 
 .footer-container {
   background-color: #538083;
-  height: 35px;
+  min-height: 35px;
   color: #dfd9e2;
   font-size: 1.1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .footer-item {
@@ -144,4 +145,10 @@ select {
   font-size: inherit;
   font-weight: inherit;
   font-family: inherit;
+}
+
+@media only screen and (max-width: 600px) {
+  #footer-middle {
+    display: none;
+  }
 }

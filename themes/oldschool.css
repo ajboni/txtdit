@@ -96,12 +96,13 @@ main {
 
 .footer-container {
   background-color: #00a8a8;
-  height: 30px;
+  min-height: 30px;
   color: #fcfcfc;
   font-size: 1.1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .footer-item {
@@ -146,6 +147,11 @@ select {
   font-family: inherit;
 }
 
+@media only screen and (max-width: 600px) {
+  #footer-middle {
+    display: none;
+  }
+}
 main::before {
   content: " ";
   display: block;
