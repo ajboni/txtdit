@@ -11,7 +11,7 @@
 <div class="footer-item-container">
   <ThemeSelector />
 </div>
-<div class="footer-middle">
+<div class="footer-middle" id="footer-middle">
   <FooterItem
     caption={pkg.version}
     icon="fab fa-github"

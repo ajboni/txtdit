@@ -28,6 +28,6 @@
     name="editor"
     id="editor"
     cols="30"
-    rows="10" />
+    rows="2" />
   <Dropzone />
 </div>
