@@ -1,6 +1,6 @@
 {
 	"name": "txtdit",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "Featureless themeable text editor. https://txtdit.aboni.dev",
 	"repository": {
 		"type": "git",

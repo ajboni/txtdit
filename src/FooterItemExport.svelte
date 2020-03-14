@@ -12,7 +12,7 @@
 
     var a = window.document.createElement("a");
     a.href = window.URL.createObjectURL(
-      new Blob([content], { type: "text/plain" })
+      new Blob([$content], { type: "text/plain" })
     );
     a.download = $documentName;
 
